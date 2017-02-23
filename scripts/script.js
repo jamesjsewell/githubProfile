@@ -3,6 +3,7 @@ console.log('hello world')
 //GLOBAL VARIABLES -------------------------------------
 //determines which section of the page to build       //
 var dataSet = 'profile'								  //
+var profileNodes = {}							      //
 													  //
 //user profile attributes are stored in this data set //
 var userProfile = {}								  //
@@ -38,6 +39,7 @@ function process_new_data(dataObj){
 	if(dataSet === 'profile'){
 		
 		userProfile = {
+
 			avatar: {class: "userAvatar", tag: "img", content: dataObj.avatar_url},
 			name: {class: "fullName", tag: "h2" , content: dataObj.name},
 			username: {class: "userName", tag: "h3", content: dataObj.login},
@@ -71,18 +73,55 @@ function build_html(){
 
 			var attribute = userProfile[i]
 			console.log(attribute)
+			var node = build_a_node(attribute.tag, attribute.class, attribute.content)
+			profileNodes[i] = node 
 		}
 	}	
+
+	console.log('nodes', profileNodes)
+
+	apply_html()
 }
 
 //builds and returns a single html node given defining arguments
-function build_a_node(){
+function build_a_node(tag, selector, content){
 
+	var nodeString = ""
+
+	var node = document.createElement(tag)
+
+	if(tag === 'img'){
+		node.setAttribute("class", selector)
+		node.src = content
+	}
+
+	else{
+		node.setAttribute("class", selector)
+		node.innerHTML = content
+	}
+
+	console.log(node)
+
+	return node
 }
 
 //adds completed html to page
 function apply_html(){
 
+	if(dataSet === "profile"){
+
+		var profileContainer = document.createElement("div")
+		profileContainer.setAttribute("id", "profileContainer")
+
+		for(var i in profileNodes){
+			console.log(profileNodes[i])
+			profileContainer.appendChild(profileNodes[i])
+		}
+
+		var bodyNode = document.querySelector("#thePage")
+		bodyNode.appendChild(profileContainer)
+
+	}
 }
 
 //starts the app
