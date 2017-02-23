@@ -44,16 +44,16 @@ function process_new_data(dataObj){
 			name: {class: "fullName", tag: "h2" , content: dataObj.name},
 			username: {class: "userName", tag: "h3", content: dataObj.login},
 			bio: {class: "bio", tag: "p", content: dataObj.bio},
-			org: {class: "orgLink", tag: "p", content: dataObj.organizations_url},
+			org: {class: "orgLink", tag: "a", content: dataObj.company},
 			city: {class: "city", tag: "p", content: dataObj.location},
 			email: {class: "email", tag: "p", content: dataObj.email},
-			blog: {class: "blog", tag: "p", content: dataObj.blog}
+			blog: {class: "blog", tag: "a", content: dataObj.blog}
 		}
 	}
 
 	//gathers info needed for repo section 
 	if(dataSet === 'repo'){
-		
+		console.log('made it to repo')
 		userRepo = {
 
 			test: "test"
@@ -95,7 +95,13 @@ function build_a_node(tag, selector, content){
 		node.src = content
 	}
 
-	else{
+	if(tag === 'a'){
+		node.setAttribute("class", selector)
+		node.setAttribute("href", content)
+		node.innerHTML = content
+	}
+
+	if(tag != 'a' && tag != 'img'){
 		node.setAttribute("class", selector)
 		node.innerHTML = content
 	}
@@ -121,21 +127,23 @@ function apply_html(){
 		var bodyNode = document.querySelector("#thePage")
 		bodyNode.appendChild(profileContainer)
 
+	initialize_app('repo', 'jamesjsewell')
+	
 	}
 }
 
 //starts the app
-function initialize_app(){
+function initialize_app(pageSection, user){
 
 	//build profile section
 	//apiPaths.profile for profile info and .repo for repo info 
-	dataSet = 'profile'
-	var apiPaths = build_url('jamesjsewell')
-	request_data(apiPaths.profile)
+	dataSet = pageSection
+	var apiPaths = build_url(user)
+	request_data(apiPaths[dataSet])
 	
 }
 
-initialize_app()
+initialize_app('profile', 'jamesjsewell')
 
 
 
