@@ -21,3 +21,19 @@ p {
 	vertical-align: center;
 }
 
+.profileContainer{
+	padding: 1em;
+	width: 30%;
+	display: inline-block;
+	margin: 2em;
+	vertical-align: top;
+}
+.repoContainer{
+	padding: 1em;
+	width: 60%;
+	display: inline-block;
+	margin: 2em;
+	vertical-align: top;
+
+}
+
