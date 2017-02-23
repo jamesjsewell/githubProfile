@@ -2,7 +2,7 @@ console.log('hello world')
 
 //GLOBAL VARIABLES -------------------------------------
 //determines which section of the page to build       //
-var currentUser = 'magentanova'						  //	
+var currentUser = 'jamesjsewell'					  //	
 var dataSet = 'profile'								  //
 var profileNodes = {}								  //
 var repoNodes = []						      	      //
@@ -69,7 +69,7 @@ function process_new_data(dataObj){
 			repoSource = repos[i]
 			userRepo[i] = {
 				name: {class: "repoName", tag: "h2", content: repoSource.name},
-				description: {class: "repoDescription", tag: "h3", content: repoSource.description},
+				description: {class: "repoDescription", tag: "p", content: repoSource.description},
 				language: {class: "repoLang", tag: "p", content: repoSource.language},
 				updatedAt: {class: "updated", tag: "p", content: repoSource.updated_at}
 
@@ -202,8 +202,44 @@ function initialize_app(pageSection, user){
 	
 }
 
+function clearState(){
+
+	currentUser = ''					  	
+	dataSet = ''								  
+	profileNodes = {}								  
+	repoNodes = []	
+	userProfile = {}
+	userRepo = {}
+	clear_html()
+}
+
+function clear_html(){
+	
+	var body = document.querySelector("#thePage")
+	var repoContainer = document.querySelector('.repoContainer')
+	//repoContainer.innerHTML = ""
+	var profileContainer = document.querySelector('.profileContainer')
+	//body.innerHTML = ""
+	body.removeChild(repoContainer)
+	body.removeChild(profileContainer)
+
+}
+
 initialize_app('profile', currentUser)
 
+var userSearchNode = document.querySelector("#userSearchNode")
+console.log(userSearchNode)
+userSearchNode.addEventListener('keydown', function(eventObj){
+	console.log(eventObj.target.value, eventObj.keyCode)
+	if(eventObj.keyCode === 13){
+		
+		clearState()
+		var userQuery = eventObj.target.value
+		currentUser = userQuery
+		initialize_app('profile', userQuery)
+		eventObj.target.value = ""
+	}
+})
 
 
 
