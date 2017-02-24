@@ -17,7 +17,9 @@ p {
 
 #pageHeader{
 	width:100%;
-	background: grey;
+	background: #333;
+	text-align: left;
+	/*padding: .5em;*/
 
 }
 
@@ -25,6 +27,12 @@ p {
 	vertical-align: center;
 	margin: auto;
 	width: 90%;
+}
+
+.logo{
+	max-width: 100%;
+	width: 3em;
+	height: 3em;
 }
 
 input[type=text] {
@@ -37,7 +45,7 @@ input[type=text] {
     /*background-image: url('searchicon.png');*/
     background-position: 10px 10px; 
     background-repeat: no-repeat;
-    padding: 12px 20px 12px 40px;
+    padding: 5px 2px 5px 2px;
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
 }
@@ -65,6 +73,24 @@ input[type=text]:focus {
 	display: inline-block;
 	margin: 2em;
 	vertical-align: top;
-
 }
+
+.repoName{
+	font-size: 150%;
+	font-family: 'Cabin', sans-serif;
+}
+.userName{
+	font-size: 150%;
+	font-family: 'Cabin', sans-serif;
+}
+.fullName{
+	font-size: 200%;
+	font-family: 'Cabin', sans-serif;
+}
+p{
+	font-size: 100%;
+	font-family: 'Fira Sans', sans-serif;
+}
+
+
 
